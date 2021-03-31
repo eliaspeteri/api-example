@@ -1,5 +1,5 @@
 {
-    "name": "projekti",
+    "name": "project",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
@@ -13,12 +13,13 @@
         "express",
         "db",
         "database",
-        "sql"
+        "sql",
+        "sqlite",
+        "docker"
     ],
     "author": "Elias Peteri",
     "license": "ISC",
     "dependencies": {
-        "cors": "^2.8.5",
         "express": "^4.17.1",
         "sqlite3": "^5.0.2"
     }

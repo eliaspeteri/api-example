@@ -13,6 +13,8 @@ to download the required dependencies outlined in package.json. The used depende
 -   express
 -   sqlite3
 
+Furthermore, if you have Docker installed, you can build the image for this project and spin up a container either through your preferred shell/terminal or through the VSCode extension.
+
 ## Database formatting and initialization
 
 To drop all tables in the SQLite3 database and create a new one called _articles_ based on given sample data, run this command.
@@ -27,9 +29,9 @@ Running the API can be done with **node server.js** or alternatively **npm start
 
 ## Environment variables
 
-HOST = by default **localhost** or 127.0.0.1
+HOST = by default **localhost** or 127.0.0.1, currently not possible to alter.
 
-PORT = by default **3001** or process.env.PORT if one is specified
+PORT = by default **3001** or process.env.PORT if one is specified.
 
 # API Features
 
