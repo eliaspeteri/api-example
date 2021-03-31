@@ -1,0 +1,31 @@
+GET http://localhost:3001/api/articles HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:3001/api/articles/10 HTTP/1.1
+content-type:application/json
+###
+GET http://localhost:3001/api/articles/1/1 HTTP/1.1
+content-type:application/json
+###
+POST http://localhost:3001/api/articles HTTP/1.1
+content-type:application/json
+
+{
+    "userId":10,
+    "title": "Lorem",
+    "body": "Ipsum"
+}
+
+###
+PATCH http://localhost:3001/api/articles/10/103 HTTP/1.1
+content-type:application/json
+
+{
+    "title":"Liirum",
+    "body":"Laarum"
+}
+
+###
+DELETE http://localhost:3001/api/articles/10/103 HTTP/1.1
+content-type:application/json
+###
