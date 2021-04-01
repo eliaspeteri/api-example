@@ -1,3 +1,5 @@
+[![CI to Docker Hub](https://github.com/eliaspeteri/api-example/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/eliaspeteri/api-example/actions/workflows/main.yml)
+
 # Prerequisites
 
 ## Node.js project installation
