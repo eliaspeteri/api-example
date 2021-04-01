@@ -29,7 +29,7 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys:
+          restore-keys: |
             ${{ runner.os }}-buildx-
     
       # Checks out repository under $GITHUB_WORKSPACE, so workflow can access it
@@ -55,10 +55,11 @@ jobs:
         with:
           context: ./
           file: Dockerfile
+          builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ftrokk:latest
-          cache-from: type=local, src=/tmp/.buildx-cache
-          cache-to: type=local, src=/tmp/.buildx-cache
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,src=/tmp/.buildx-cache
           
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
