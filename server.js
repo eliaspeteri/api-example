@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Root of the API, landing page
-app.get("/", (request, response) => {
+app.get("/", (_request, response) => {
     response.send(`
     <h1>This is an example API application.</h1>
     You can begin exploring by navigating to HOST:PORT/api/info (the address that landed you here).
@@ -49,7 +49,7 @@ app.get("/", (request, response) => {
     `);
 });
 
-app.get("/api", (request, response) => {
+app.get("/api", (_request, response) => {
     response.send(`
     <h1>This is an example API application.</h1>
     You can begin exploring by navigating to HOST:PORT/api/info (the address that landed you here).
@@ -58,7 +58,7 @@ app.get("/api", (request, response) => {
 });
 
 // Info page
-app.get("/api/info", (request, response) => {
+app.get("/api/info", (_request, response) => {
     response.send(`
     <h1>COMMANDS</h1>
     <h2>GET</h2>
@@ -77,7 +77,7 @@ app.get("/api/info", (request, response) => {
 });
 
 // GET
-app.get("/api/articles", (request, response) => {
+app.get("/api/articles", (_request, response) => {
     db.all(
         `SELECT
         *
@@ -147,7 +147,8 @@ app.post("/api/articles", (request, response) => {
             ?
         )`,
         [reqBody.userId, reqBody.title, reqBody.body],
-        (err, result) => {
+        // eslint-disable-next-line no-unused-vars
+        (err, _result) => {
             if (err) {
                 response.status(400).json({ error: err.message });
             } else
@@ -171,7 +172,8 @@ app.patch("/api/articles/:uid/:id", (request, response) => {
         body = COALESCE(?,body)
         WHERE id = ?`,
         [request.params.uid, reqBody.title, reqBody.body, request.params.id],
-        (err, result) => {
+        // eslint-disable-next-line no-unused-vars
+        (err, _result) => {
             if (err) {
                 response.status(400).json({ error: err.message });
                 return;
@@ -194,7 +196,8 @@ app.delete("/api/articles/:uid/:id", (request, response) => {
     AND id = ?
     `,
         [request.params.uid, request.params.id],
-        (err, result) => {
+        // eslint-disable-next-line no-unused-vars
+        (err, _result) => {
             if (err) {
                 response.status(400).json({ error: err.message });
             }
@@ -204,27 +207,12 @@ app.delete("/api/articles/:uid/:id", (request, response) => {
 });
 
 // Handles unknown endpoints
-const unknownEndpoint = (error, request, response, next) => {
+const unknownEndpoint = (error, _request, response, next) => {
     response.status(404).send({ error: "unknown endpoint" });
     next(error);
 };
 
 app.use(unknownEndpoint);
-
-// Error handler for a few common errors
-// const errorHandler = (error, request, response, next) => {
-//     console.log(error.message);
-//     if (error.name === "CastError") {
-//         return response.status(400).send({ error: "malformatted id" });
-//     } else if (error.name === "ValidationError") {
-//         return response.status(400).json({ error: error.message });
-//     } else {
-//         return response.status(400).json({ error: error.message });
-//     }
-//     next(error);
-// };
-
-// app.use(errorHandler);
 
 // Setting up express to listen on the specified host and port
 const PORT = process.env.PORT || 3001;
